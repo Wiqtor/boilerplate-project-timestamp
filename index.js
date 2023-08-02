@@ -40,6 +40,7 @@ app.get("/api/:date?", (req, res) => {
     : new Date(parseInt(param));
 
   if (resDate.valueOf() > 0 && resDate.toUTCString() != "Invalid Date") {
+    console.log("INPUT DATE: ", param);
     res.json({
       unix: resDate.valueOf(),
       utc: resDate.toUTCString(),

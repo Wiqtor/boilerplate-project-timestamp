@@ -38,12 +38,15 @@ app.get("/api/:date?", (req, res) => {
   resDate = isReadable
     ? new Date(Date.parse(param))
     : new Date(parseInt(param));
-  res.json({
-    unix: resDate.valueOf(),
-    utc: resDate.toUTCString(),
-    // input: param,
-    // resDate: resDate,
-  });
+
+  if (resDate.valueOf() > 0 && resDate.toUTCString() != "Invalid Date") {
+    res.json({
+      unix: resDate.valueOf(),
+      utc: resDate.toUTCString(),
+      // input: param,
+      // resDate: resDate,
+    });
+  } else return res.json({ error: "Invalid Date" });
 });
 
 // listen for requests :)
